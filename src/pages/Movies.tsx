@@ -1,9 +1,4 @@
 import { Button, Card, Col, Drawer, Input, Row, Skeleton } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import {
   getPopularMovies,
@@ -61,9 +56,10 @@ const Movies = () => {
   const onSearch: SearchProps["onSearch"] = (value) => setSearch(value);
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div style={{ padding: "40px", width: "100%" }}>
       <div
         style={{
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -90,12 +86,17 @@ const Movies = () => {
       >
         <MoviesItem />
       </Drawer>
-      <Row gutter={[0, 40]}>
+      <Row
+        gutter={[
+          { xs: 8, sm: 16, md: 24, lg: 24, xl: 24, xxl: 24 },
+          { xs: 8, sm: 16, md: 24, lg: 24, xl: 24, xxl: 24 },
+        ]}
+      >
         {(search === "" ? data : searchMovie?.data)?.results?.map(
           (movie: MovieTypes) => (
-            <Col className="gutter-row" span={6} key={movie.id}>
+            <Col className="gutter-row" md={8} xl={6} span={24} key={movie.id}>
               <Card
-                style={{ width: 320, height: 350, cursor: "pointer" }}
+                style={{ width: "100%", height: 350, cursor: "pointer" }}
                 onClick={() => {
                   setOpenDrawer(true), movieStore.handlePopularMovie(movie);
                 }}
